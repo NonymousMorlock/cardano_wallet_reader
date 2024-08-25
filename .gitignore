@@ -112,3 +112,4 @@ app.*.map.json
 !.idea/runConfigurations/
 
 .idea/runConfigurations/development.xml
+*.env
