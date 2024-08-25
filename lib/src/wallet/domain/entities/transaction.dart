@@ -13,7 +13,6 @@ class Transaction extends Equatable {
     required this.fees,
     required this.deposit,
     required this.size,
-    required this.invalidHereafter,
     required this.utxoCount,
     required this.withdrawalCount,
     required this.mirCertCount,
@@ -25,6 +24,7 @@ class Transaction extends Equatable {
     required this.redeemerCount,
     required this.validContract,
     this.invalidBefore,
+    this.invalidHereafter,
   });
 
   Transaction.empty()
@@ -62,7 +62,7 @@ class Transaction extends Equatable {
   final double deposit;
   final int size;
   final DateTime? invalidBefore;
-  final DateTime invalidHereafter;
+  final DateTime? invalidHereafter;
   final int utxoCount;
   final int withdrawalCount;
   final int mirCertCount;

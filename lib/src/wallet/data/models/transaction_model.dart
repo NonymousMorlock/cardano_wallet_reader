@@ -16,7 +16,6 @@ class TransactionModel extends Transaction {
     required super.fees,
     required super.deposit,
     required super.size,
-    required super.invalidHereafter,
     required super.utxoCount,
     required super.withdrawalCount,
     required super.mirCertCount,
@@ -28,6 +27,7 @@ class TransactionModel extends Transaction {
     required super.redeemerCount,
     required super.validContract,
     super.invalidBefore,
+    super.invalidHereafter,
   });
 
   TransactionModel.empty()
@@ -117,9 +117,11 @@ class TransactionModel extends Transaction {
               : DateTime.fromMillisecondsSinceEpoch(
                   int.parse(map['invalid_before'] as String),
                 ),
-          invalidHereafter: DateTime.fromMillisecondsSinceEpoch(
-            int.parse(map['invalid_hereafter'] as String),
-          ),
+          invalidHereafter: (map['invalid_hereafter']) == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(
+                  int.parse(map['invalid_hereafter'] as String),
+                ),
           utxoCount: (map['utxo_count'] as num).toInt(),
           withdrawalCount: (map['withdrawal_count'] as num).toInt(),
           mirCertCount: (map['mir_cert_count'] as num).toInt(),
@@ -199,7 +201,7 @@ class TransactionModel extends Transaction {
       'deposit': (deposit % 1 == 0 ? deposit.toInt() : deposit).toString(),
       'size': size,
       'invalid_before': invalidBefore?.millisecondsSinceEpoch.toString(),
-      'invalid_hereafter': invalidHereafter.millisecondsSinceEpoch.toString(),
+      'invalid_hereafter': invalidHereafter?.millisecondsSinceEpoch.toString(),
       'utxo_count': utxoCount,
       'withdrawal_count': withdrawalCount,
       'mir_cert_count': mirCertCount,
