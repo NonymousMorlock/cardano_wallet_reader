@@ -9,19 +9,21 @@ abstract class CoreUtils {
     Color? colour,
     Color? textColour,
   }) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-          style: GoogleFonts.roboto(
-            color: textColour ?? Colors.white,
-            fontSize: 16,
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            message,
+            style: GoogleFonts.roboto(
+              color: textColour ?? Colors.white,
+              fontSize: 16,
+            ),
           ),
+          backgroundColor: colour ?? Colors.red,
+          behavior: SnackBarBehavior.floating,
         ),
-        backgroundColor: colour ?? Colors.red,
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
+      );
   }
 
   static Future<void> copyToClipboard(
