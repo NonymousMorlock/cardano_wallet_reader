@@ -7,7 +7,7 @@ sealed class Failure extends Equatable {
   final String message;
   final String statusCode;
 
-  String get errorMessage => '$statusCode Error: $message';
+  String get errorMessage => '$statusCode: $message';
 
   @override
   List<Object> get props => [message, statusCode];
