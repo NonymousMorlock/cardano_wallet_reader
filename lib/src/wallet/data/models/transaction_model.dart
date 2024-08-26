@@ -63,7 +63,10 @@ class TransactionModel extends Transaction {
           block: '356b7d7dbb696ccd12775c016941057a9dc70898d87a63fc752271b'
               'b46856940',
           blockHeight: 123456,
-          blockTime: DateTime.fromMillisecondsSinceEpoch(1635505891),
+          blockTime: DateTime.fromMillisecondsSinceEpoch(
+            1635505891 * 1000,
+            isUtc: true,
+          ),
           slot: 42000000,
           index: 1,
           outputAmount: <OutputAmountModel>[
@@ -100,7 +103,8 @@ class TransactionModel extends Transaction {
           block: map['block'] as String,
           blockHeight: (map['block_height'] as num).toInt(),
           blockTime: DateTime.fromMillisecondsSinceEpoch(
-            (map['block_time'] as num).toInt(),
+            (map['block_time'] as num).toInt() * 1000,
+            isUtc: true,
           ),
           slot: map['slot'] as int,
           index: map['index'] as int,
@@ -192,7 +196,7 @@ class TransactionModel extends Transaction {
       'hash': hash,
       'block': block,
       'block_height': blockHeight,
-      'block_time': blockTime.millisecondsSinceEpoch,
+      'block_time': blockTime.millisecondsSinceEpoch ~/ 1000,
       'slot': slot,
       'index': index,
       'output_amount':
