@@ -8,14 +8,14 @@ class WalletModel extends Wallet {
     required super.address,
     required super.stakeAddress,
     required super.active,
-    required super.activeEpoch,
     required super.controlledAmount,
     required super.rewardsSum,
     required super.withdrawalsSum,
     required super.reservesSum,
     required super.treasurySum,
     required super.withdrawableAmount,
-    required super.poolId,
+    super.activeEpoch,
+    super.poolId,
   });
 
   WalletModel.empty()
@@ -40,7 +40,10 @@ class WalletModel extends Wallet {
           stakeAddress:
               'stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7',
           active: true,
-          activeEpoch: DateTime.fromMillisecondsSinceEpoch(412),
+          activeEpoch: DateTime.fromMillisecondsSinceEpoch(
+            412 * 1000,
+            isUtc: true,
+          ),
           controlledAmount:
               double.parse('619154618165') / AppConstants.lovelaceFactor,
           rewardsSum:
@@ -60,9 +63,12 @@ class WalletModel extends Wallet {
           address: '',
           stakeAddress: map['stake_address'] as String,
           active: map['active'] as bool,
-          activeEpoch: DateTime.fromMillisecondsSinceEpoch(
-            (map['active_epoch'] as num).toInt(),
-          ),
+          activeEpoch: map['active_epoch'] == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(
+                  (map['active_epoch'] as num).toInt() * 1000,
+                  isUtc: true,
+                ),
           controlledAmount: int.parse(map['controlled_amount'] as String) /
               AppConstants.lovelaceFactor,
           rewardsSum: int.parse(map['rewards_sum'] as String) /
@@ -75,7 +81,7 @@ class WalletModel extends Wallet {
               AppConstants.lovelaceFactor,
           withdrawableAmount: int.parse(map['withdrawable_amount'] as String) /
               AppConstants.lovelaceFactor,
-          poolId: map['pool_id'] as String,
+          poolId: map['pool_id'] as String?,
         );
 
   WalletModel copyWith({
@@ -115,11 +121,16 @@ class WalletModel extends Wallet {
     final treasurySum = this.treasurySum * AppConstants.lovelaceFactor;
     final withdrawableAmount =
         this.withdrawableAmount * AppConstants.lovelaceFactor;
+    final activeEpoch = this.activeEpoch;
+    int? activeEpochMillis;
+    if (activeEpoch != null) {
+      activeEpochMillis = activeEpoch.millisecondsSinceEpoch ~/ 1000;
+    }
 
     return {
       'stake_address': stakeAddress,
       'active': active,
-      'active_epoch': activeEpoch.millisecondsSinceEpoch,
+      'active_epoch': activeEpochMillis,
       'controlled_amount': (controlledAmount % 1 == 0
               ? controlledAmount.toInt()
               : controlledAmount)
