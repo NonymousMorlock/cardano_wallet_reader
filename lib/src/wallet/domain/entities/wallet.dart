@@ -5,14 +5,14 @@ class Wallet extends Equatable {
     required this.address,
     required this.stakeAddress,
     required this.active,
-    required this.activeEpoch,
     required this.controlledAmount,
     required this.rewardsSum,
     required this.withdrawalsSum,
     required this.reservesSum,
     required this.treasurySum,
     required this.withdrawableAmount,
-    required this.poolId,
+    this.activeEpoch,
+    this.poolId,
   });
 
   Wallet.empty()
@@ -33,17 +33,18 @@ class Wallet extends Equatable {
   final bool active;
 
   /// The account has been participating in staking since this epoch
-  final DateTime activeEpoch;
+  final DateTime? activeEpoch;
   final double controlledAmount;
   final double rewardsSum;
   final double withdrawalsSum;
   final double reservesSum;
   final double treasurySum;
   final double withdrawableAmount;
-  final String poolId;
+  final String? poolId;
 
   @override
   List<Object?> get props => [
+        address,
         stakeAddress,
         active,
         activeEpoch,
