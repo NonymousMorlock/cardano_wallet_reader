@@ -29,6 +29,8 @@ class GetTransactionsParams extends Equatable {
     this.page,
   });
 
+  const GetTransactionsParams.empty() : this(walletAddress: 'Test String');
+
   final String walletAddress;
   final SortOrder? order;
   final int? limit;
