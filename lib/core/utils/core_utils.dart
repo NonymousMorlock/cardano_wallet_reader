@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,7 +33,9 @@ abstract class CoreUtils {
     required String text,
   }) async {
     await Clipboard.setData(ClipboardData(text: text));
-    if (context.mounted) {
+    final isDesktop =
+        Platform.isWindows || Platform.isLinux || Platform.isMacOS;
+    if (context.mounted && isDesktop) {
       showSnackBar(
         context,
         message: 'Copied to clipboard',
