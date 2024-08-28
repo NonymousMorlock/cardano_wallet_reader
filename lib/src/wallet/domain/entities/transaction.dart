@@ -97,6 +97,10 @@ class Transaction extends Equatable {
   final List<Utxo> inputs;
   final List<Utxo> outputs;
 
+  bool get isPositive =>
+      outputs.any((output) => output.address == walletAddress) &&
+      inputs.every((input) => input.address != walletAddress);
+
   @override
   List<Object?> get props => [
         walletAddress,
