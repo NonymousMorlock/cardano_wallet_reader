@@ -62,6 +62,8 @@ class Transaction extends Equatable {
   final String block;
   final int blockHeight;
   final DateTime blockTime;
+
+  /// The exact slot in which the transaction was included in the blockchain.
   final int slot;
   final int index;
   final List<OutputAmount> outputAmount;
