@@ -3,6 +3,7 @@ import 'package:cardano_wallet_reader/core/utils/typedefs.dart';
 import 'package:cardano_wallet_reader/src/wallet/data/models/output_amount_model.dart';
 import 'package:cardano_wallet_reader/src/wallet/domain/entities/output_amount.dart';
 import 'package:cardano_wallet_reader/src/wallet/domain/entities/transaction.dart';
+import 'package:cardano_wallet_reader/src/wallet/domain/entities/utxo.dart';
 
 class TransactionModel extends Transaction {
   const TransactionModel({
