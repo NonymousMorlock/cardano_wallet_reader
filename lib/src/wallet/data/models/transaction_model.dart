@@ -27,6 +27,8 @@ class TransactionModel extends Transaction {
     required super.assetMintOrBurnCount,
     required super.redeemerCount,
     required super.validContract,
+    required super.inputs,
+    required super.outputs,
     super.invalidBefore,
     super.invalidHereafter,
   });
@@ -56,6 +58,8 @@ class TransactionModel extends Transaction {
           assetMintOrBurnCount: 1,
           redeemerCount: 1,
           validContract: true,
+          inputs: [],
+          outputs: [],
         );
 
   TransactionModel.fixture()
@@ -98,6 +102,8 @@ class TransactionModel extends Transaction {
           assetMintOrBurnCount: 0,
           redeemerCount: 0,
           validContract: true,
+          inputs: [],
+          outputs: [],
         );
 
   TransactionModel.fromMap(DataMap map)
@@ -137,6 +143,8 @@ class TransactionModel extends Transaction {
               (map['asset_mint_or_burn_count'] as num).toInt(),
           redeemerCount: (map['redeemer_count'] as num).toInt(),
           validContract: map['valid_contract'] as bool,
+          inputs: [],
+          outputs: [],
         );
 
   TransactionModel copyWith({
@@ -163,6 +171,8 @@ class TransactionModel extends Transaction {
     int? assetMintOrBurnCount,
     int? redeemerCount,
     bool? validContract,
+    List<Utxo>? inputs,
+    List<Utxo>? outputs,
   }) {
     return TransactionModel(
       walletAddress: walletAddress ?? this.walletAddress,
@@ -188,6 +198,8 @@ class TransactionModel extends Transaction {
       assetMintOrBurnCount: assetMintOrBurnCount ?? this.assetMintOrBurnCount,
       redeemerCount: redeemerCount ?? this.redeemerCount,
       validContract: validContract ?? this.validContract,
+      inputs: inputs ?? this.inputs,
+      outputs: outputs ?? this.outputs,
     );
   }
 
