@@ -44,8 +44,8 @@ class TransactionModel extends Transaction {
           fees: 1,
           deposit: 1,
           size: 1,
-          invalidBefore: DateTime.now(),
-          invalidHereafter: DateTime.now(),
+          invalidBefore: null,
+          invalidHereafter: 1,
           utxoCount: 1,
           withdrawalCount: 1,
           mirCertCount: 1,
@@ -87,7 +87,7 @@ class TransactionModel extends Transaction {
           deposit: 0,
           size: 433,
           invalidBefore: null,
-          invalidHereafter: DateTime.fromMillisecondsSinceEpoch(13885913),
+          invalidHereafter: 13885913,
           utxoCount: 4,
           withdrawalCount: 0,
           mirCertCount: 0,
@@ -120,16 +120,12 @@ class TransactionModel extends Transaction {
           deposit: double.parse(map['deposit'] as String) /
               AppConstants.lovelaceFactor,
           size: (map['size'] as num).toInt(),
-          invalidBefore: (map['invalid_before']) == null
+          invalidBefore: map['invalid_before'] == null
               ? null
-              : DateTime.fromMillisecondsSinceEpoch(
-                  int.parse(map['invalid_before'] as String),
-                ),
-          invalidHereafter: (map['invalid_hereafter']) == null
+              : int.parse(map['invalid_before'] as String),
+          invalidHereafter: map['invalid_hereafter'] == null
               ? null
-              : DateTime.fromMillisecondsSinceEpoch(
-                  int.parse(map['invalid_hereafter'] as String),
-                ),
+              : int.parse(map['invalid_hereafter'] as String),
           utxoCount: (map['utxo_count'] as num).toInt(),
           withdrawalCount: (map['withdrawal_count'] as num).toInt(),
           mirCertCount: (map['mir_cert_count'] as num).toInt(),
@@ -155,8 +151,8 @@ class TransactionModel extends Transaction {
     double? fees,
     double? deposit,
     int? size,
-    DateTime? invalidBefore,
-    DateTime? invalidHereafter,
+    int? invalidBefore,
+    int? invalidHereafter,
     int? utxoCount,
     int? withdrawalCount,
     int? mirCertCount,
@@ -198,6 +194,7 @@ class TransactionModel extends Transaction {
   DataMap toMap() {
     final fees = this.fees * AppConstants.lovelaceFactor;
     final deposit = this.deposit * AppConstants.lovelaceFactor;
+
     return <String, dynamic>{
       'hash': hash,
       'block': block,
@@ -210,8 +207,8 @@ class TransactionModel extends Transaction {
       'fees': (fees % 1 == 0 ? fees.toInt() : fees).toString(),
       'deposit': (deposit % 1 == 0 ? deposit.toInt() : deposit).toString(),
       'size': size,
-      'invalid_before': invalidBefore?.millisecondsSinceEpoch.toString(),
-      'invalid_hereafter': invalidHereafter?.millisecondsSinceEpoch.toString(),
+      'invalid_before': invalidBefore?.toString(),
+      'invalid_hereafter': invalidHereafter?.toString(),
       'utxo_count': utxoCount,
       'withdrawal_count': withdrawalCount,
       'mir_cert_count': mirCertCount,
