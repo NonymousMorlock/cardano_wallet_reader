@@ -24,6 +24,8 @@ class Transaction extends Equatable {
     required this.assetMintOrBurnCount,
     required this.redeemerCount,
     required this.validContract,
+    required this.inputs,
+    required this.outputs,
     this.invalidBefore,
     this.invalidHereafter,
   });
@@ -51,7 +53,9 @@ class Transaction extends Equatable {
         poolRetireCount = 1,
         assetMintOrBurnCount = 1,
         redeemerCount = 1,
-        validContract = true;
+        validContract = true,
+        inputs = [],
+        outputs = [];
 
   final String walletAddress;
   final String hash;
@@ -90,6 +94,8 @@ class Transaction extends Equatable {
   final int assetMintOrBurnCount;
   final int redeemerCount;
   final bool validContract;
+  final List<Utxo> inputs;
+  final List<Utxo> outputs;
 
   @override
   List<Object?> get props => [
