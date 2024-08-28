@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 
 class Transaction extends Equatable {
   const Transaction({
+    required this.walletAddress,
     required this.hash,
     required this.block,
     required this.blockHeight,
@@ -28,7 +29,8 @@ class Transaction extends Equatable {
   });
 
   Transaction.empty()
-      : hash = 'Test String',
+      : walletAddress = 'Test String',
+        hash = 'Test String',
         block = 'Test String',
         blockHeight = 1,
         blockTime = DateTime.now(),
@@ -51,6 +53,7 @@ class Transaction extends Equatable {
         redeemerCount = 1,
         validContract = true;
 
+  final String walletAddress;
   final String hash;
   final String block;
   final int blockHeight;
@@ -76,6 +79,7 @@ class Transaction extends Equatable {
 
   @override
   List<Object?> get props => [
+        walletAddress,
         hash,
         block,
         blockHeight,
