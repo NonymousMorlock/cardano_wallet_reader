@@ -40,8 +40,8 @@ class Transaction extends Equatable {
         fees = 1,
         deposit = 1,
         size = 1,
-        invalidBefore = DateTime.now(),
-        invalidHereafter = DateTime.now(),
+        invalidBefore = null,
+        invalidHereafter = 1,
         utxoCount = 1,
         withdrawalCount = 1,
         mirCertCount = 1,
@@ -64,8 +64,22 @@ class Transaction extends Equatable {
   final double fees;
   final double deposit;
   final int size;
-  final DateTime? invalidBefore;
-  final DateTime? invalidHereafter;
+
+  /// The earliest slot at which the transaction is valid.
+  ///
+  /// If this is null, then the transaction is valid immediately.
+  ///
+  /// To convert to DateTime, use the extension getter `slotToDateTime`.
+  final int? invalidBefore;
+
+  /// The latest slot at which the transaction is valid.
+  ///
+  /// Or
+  ///
+  /// The last slot before which this transaction must be included in a block.
+  ///
+  /// To convert to DateTime, use the extension getter `slotToDateTime`.
+  final int? invalidHereafter;
   final int utxoCount;
   final int withdrawalCount;
   final int mirCertCount;
