@@ -1,4 +1,5 @@
 import 'package:cardano_wallet_reader/src/wallet/domain/entities/output_amount.dart';
+import 'package:cardano_wallet_reader/src/wallet/domain/entities/utxo.dart';
 import 'package:equatable/equatable.dart';
 
 class Transaction extends Equatable {
