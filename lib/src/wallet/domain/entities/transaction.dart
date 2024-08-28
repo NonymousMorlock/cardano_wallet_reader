@@ -112,7 +112,7 @@ class Transaction extends Equatable {
         blockTime,
         slot,
         index,
-        outputAmount,
+        ...outputAmount,
         fees,
         deposit,
         size,
