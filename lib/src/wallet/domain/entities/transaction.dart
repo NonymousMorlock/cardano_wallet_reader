@@ -128,5 +128,7 @@ class Transaction extends Equatable {
         assetMintOrBurnCount,
         redeemerCount,
         validContract,
+        ...inputs,
+        ...outputs,
       ];
 }
