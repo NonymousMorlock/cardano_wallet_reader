@@ -6,6 +6,7 @@ import 'package:cardano_wallet_reader/src/wallet/domain/entities/transaction.dar
 
 class TransactionModel extends Transaction {
   const TransactionModel({
+    required super.walletAddress,
     required super.hash,
     required super.block,
     required super.blockHeight,
@@ -32,6 +33,7 @@ class TransactionModel extends Transaction {
 
   TransactionModel.empty()
       : this(
+          walletAddress: 'Test String',
           hash: 'Test String',
           block: 'Test String',
           blockHeight: 1,
@@ -58,6 +60,7 @@ class TransactionModel extends Transaction {
 
   TransactionModel.fixture()
       : this(
+          walletAddress: '',
           hash: '1e043f100dce12d107f679685acd2fc0610e10f72a92d412794c9773'
               'd11d8477',
           block: '356b7d7dbb696ccd12775c016941057a9dc70898d87a63fc752271b'
@@ -99,6 +102,7 @@ class TransactionModel extends Transaction {
 
   TransactionModel.fromMap(DataMap map)
       : this(
+          walletAddress: '',
           hash: map['hash'] as String,
           block: map['block'] as String,
           blockHeight: (map['block_height'] as num).toInt(),
@@ -140,6 +144,7 @@ class TransactionModel extends Transaction {
         );
 
   TransactionModel copyWith({
+    String? walletAddress,
     String? hash,
     String? block,
     int? blockHeight,
@@ -164,6 +169,7 @@ class TransactionModel extends Transaction {
     bool? validContract,
   }) {
     return TransactionModel(
+      walletAddress: walletAddress ?? this.walletAddress,
       hash: hash ?? this.hash,
       block: block ?? this.block,
       blockHeight: blockHeight ?? this.blockHeight,
