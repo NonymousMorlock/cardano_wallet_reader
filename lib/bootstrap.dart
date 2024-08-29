@@ -2,7 +2,10 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:cardano_wallet_reader/core/services/cache_helper.dart';
+import 'package:cardano_wallet_reader/core/services/injection_container.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -27,7 +30,8 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   Bloc.observer = const AppBlocObserver();
 
-  // Add cross-flavor configuration here
-
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
+  CacheHelper.instance.init(sl<SharedPreferences>());
   runApp(await builder());
 }
