@@ -18,7 +18,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   gap: ^3.0.1
-  get_it: ^9.2.0
+  get_it: ^9.2.1
   google_fonts: ^8.0.2
   http: ^1.6.0
   intl: ^0.20.2
